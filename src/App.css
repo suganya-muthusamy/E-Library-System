@@ -1,38 +1,108 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+/* .nav-item .nav-link {
+  color: white;
+} */
+/* .nav-item .active {
+  background-color: #ffc107;
+  color: white;
+  border-radius: 5px;
+} */
+/* .nav-item .nav-link:hover {
+  background-color: #ffc107;
+  color: rgb(73, 70, 70);
+  border-radius: 5px;
+  cursor: pointer;
+} */
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.btn {
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.btn:hover {
+  color: rgb(73, 70, 70);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* signup-form */
+/* .signup-form {
+  background-color: rgb(46, 41, 41);
 }
+.signup-form h3 {
+  color: #ffc107;
+}
+label {
+  color: #ffc107;
+} */
+
+/* login-form */
+/* .login-col {
+  background-color: white;
+}
+
+.login-head h3 {
+  color: #ffc107;
+  font-size: 22px;
+}
+.login-head h3 span {
+  font-size: 30px;
+} */
+
+/* login-container */
+/* .login-container {
+  width: 100%;
+  height: 88vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8));
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  object-fit: cover;
+  box-sizing: border-box;
+  background-attachment: fixed;
+} */
+
+/* search book */
+/* .search-book h3,
+.add-book h3 {
+  color: #ffc107;
+}
+
+.search-book table tr td,
+.add-book table tr td {
+  padding-right: 10px;
+  padding-top: 10px;
+}
+
+.book-table {
+  overflow-x: auto;
+}
+.book-table table td,
+th {
+  border: 1px solid rgb(206, 206, 206);
+  padding: 5px;
+  margin: 2px;
+}
+i {
+  cursor: pointer;
+} */
+/* about library */
+/* .banner {
+  width: 100%;
+  height: 40vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8));
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  object-fit: cover;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+.banner h1 {
+  margin-left: 20px;
+  font-size: 27px;
+  line-height: 50px;
+} */

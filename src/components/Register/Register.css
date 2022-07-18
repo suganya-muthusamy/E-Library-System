@@ -1,0 +1,13 @@
+/* .signup-form {
+  background-color: #212529ff;
+} */
+.signup-form h3 {
+  color: #ffc107;
+}
+.btn {
+  background-color: #ffc107;
+  color: black;
+}
+.btn:hover {
+  color: rgb(73, 70, 70);
+}

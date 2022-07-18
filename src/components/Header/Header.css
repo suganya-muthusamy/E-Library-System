@@ -1,0 +1,27 @@
+.navbar {
+  background: rgb(73, 71, 102);
+  background: linear-gradient(
+    90deg,
+    rgba(73, 71, 102, 0.9) 0%,
+    rgba(243, 179, 228, 0.958) 0%,
+    rgba(15, 187, 222, 0.8) 100%
+  );
+}
+.nav-item .nav-link {
+  color: white;
+}
+/* .nav-item .active {
+  background-color: #ffc107;
+  color: white;
+  border-radius: 5px;
+} */
+.nav-item .nav-link:hover {
+  background-color: #ffc107;
+  color: rgb(73, 70, 70);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.navbar-toggler-icon {
+  color: #ffc107;
+}
