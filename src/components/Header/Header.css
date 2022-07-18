@@ -1,10 +1,11 @@
 .navbar {
-  background: rgb(73, 71, 102);
-  background: linear-gradient(
-    90deg,
-    rgba(73, 71, 102, 0.9) 0%,
-    rgba(243, 179, 228, 0.958) 0%,
-    rgba(15, 187, 222, 0.8) 100%
+  background-image: linear-gradient(
+    to right top,
+    #051937,
+    #0b3052,
+    #10496e,
+    #146389,
+    #1b7fa3
   );
 }
 .nav-item .nav-link {

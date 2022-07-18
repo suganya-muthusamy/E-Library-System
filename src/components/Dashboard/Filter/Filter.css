@@ -1,0 +1,10 @@
+.search-book h3,
+.add-book h3 {
+  color: #ffc107;
+}
+
+.search-book table tr td,
+.add-book table tr td {
+  padding-right: 10px;
+  padding-top: 10px;
+}

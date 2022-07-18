@@ -1,1 +1,19 @@
-
+.banner {
+  width: 100%;
+  height: 40vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)),
+    url("../../assets/image/book.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  object-fit: cover;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+.banner h1 {
+  margin-left: 20px;
+  font-size: 27px;
+  line-height: 50px;
+}

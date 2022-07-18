@@ -1,6 +1,16 @@
 /* .signup-form {
   background-color: #212529ff;
 } */
+.signup-form {
+  background-image: linear-gradient(
+    to right top,
+    #051937,
+    #0b3052,
+    #10496e,
+    #146389,
+    #1b7fa3
+  );
+}
 .signup-form h3 {
   color: #ffc107;
 }

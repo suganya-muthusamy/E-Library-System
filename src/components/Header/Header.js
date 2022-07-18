@@ -1,14 +1,15 @@
 import "./Header.css";
 import Logo from "../../assets/image/logo.png";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <div>
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
-          <a className="navbar-brand">
+          <Link to="" className="navbar-brand">
             <img src={Logo} alt="logo" width="50" height="50" />
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -25,24 +26,37 @@ const Header = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item mx-2 mx-2">
-                <a className="nav-link active" aria-current="page">
+                <Link to="" className="nav-link active" aria-current="page">
                   Home
-                </a>
+                </Link>
               </li>
               <li className="nav-item mx-2">
-                <a className="nav-link">About Library</a>
+                <Link to="about" className="nav-link">
+                  About Library
+                </Link>
               </li>
 
               <li className="nav-item mx-2">
-                <a className="nav-link">Rules&Regulations</a>
+                <Link to="rules" className="nav-link">
+                  Rules&Regulations
+                </Link>
               </li>
               <li className="nav-item mx-2">
-                <a className="nav-link">Price Card</a>
+                <Link to="pricecard" className="nav-link">
+                  Price Card
+                </Link>
               </li>
             </ul>
             <form className="form-inline my-2 my-lg-0">
+              <button className="btn  mx-2 my-2 my-sm-0" type="submit">
+                <Link to="" className="text-decoration-none">
+                  Signup
+                </Link>
+              </button>
               <button className="btn mx-2 my-2 my-sm-0" type="submit">
-                Login
+                <Link to="login" className="text-decoration-none">
+                  Login
+                </Link>
               </button>
             </form>
           </div>

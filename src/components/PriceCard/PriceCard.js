@@ -3,7 +3,9 @@ import "./PriceCard.css";
 const PriceCard = () => {
   return (
     <div>
-      <h1>Price card.js</h1>
+      <div className="container mt-3">
+        <h2>price card</h2>
+      </div>
     </div>
   );
 };
