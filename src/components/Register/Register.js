@@ -33,6 +33,7 @@ const Register = () => {
             >
               <h3 className="text-center mb-3">Signup Now!</h3>
               {getForm.firstName}
+
               <div className=" form-floating mb-3">
                 <input
                   type="text"
