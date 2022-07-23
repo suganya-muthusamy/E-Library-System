@@ -42,9 +42,6 @@ const Login = () => {
     if (getLoginFormInput.userName && getLoginFormInput.password) {
       let userName = sessionStorage.getItem("email");
       let password = sessionStorage.getItem("password");
-      console.log(userName);
-      console.log("hi");
-      console.log(password);
       if (
         userName !== getLoginFormInput.userName ||
         password !== getLoginFormInput.password
@@ -54,7 +51,8 @@ const Login = () => {
           sessionDetail: true,
         });
       } else {
-        navigate("dashboard");
+        sessionStorage.setItem("login", true);
+        navigate("/dashboard");
       }
     }
   };
@@ -73,9 +71,9 @@ const Login = () => {
               </h3>
             </div>
             {getLoginFormCheck && getLoginFormValidation.sessionDetail && (
-              <div className="alert alert-danger">
+              <p className="text-danger text-center mt-3">
                 {formValidationError.sessionDetails}
-              </div>
+              </p>
             )}
             <form
               className="login-form my-4 d-flex justify-content-center"
@@ -99,9 +97,9 @@ const Login = () => {
                       onChange={onChangeHandler}
                     />
                     {getLoginFormCheck && getLoginFormValidation.userName && (
-                      <div className="alert alert-danger">
+                      <p className="text-danger error mt-2">
                         {formValidationError.email}
-                      </div>
+                      </p>
                     )}
                   </td>
                 </tr>
@@ -122,9 +120,9 @@ const Login = () => {
                       onChange={onChangeHandler}
                     />
                     {getLoginFormCheck && getLoginFormValidation.password && (
-                      <div className="alert alert-danger">
+                      <p className="text-danger error mt-2">
                         {formValidationError.password}
-                      </div>
+                      </p>
                     )}
                   </td>
                 </tr>

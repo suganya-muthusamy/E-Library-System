@@ -23,3 +23,7 @@
   box-sizing: border-box;
   background-attachment: fixed;
 }
+
+.error {
+  font-size: 12px;
+}

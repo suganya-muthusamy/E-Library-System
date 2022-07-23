@@ -13,6 +13,8 @@ const Table = () => {
               <th>Author</th>
               <th>Number of books available</th>
               <th>Purchase</th>
+              <th>Edit</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>

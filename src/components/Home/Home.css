@@ -1,0 +1,18 @@
+.book-wrapper img {
+  height: 300px !important;
+  border: 3px solid gray;
+  margin-top: 20px;
+}
+.home-banner {
+  height: 70vh;
+  width: 100%;
+  background-image: linear-gradient(
+      rgba(107, 147, 226, 0.8),
+      rgba(87, 107, 187, 0.7),
+      rgba(58, 108, 233, 0.8)
+    ),
+    url("../../assets/image/home-banner-img.jpeg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}

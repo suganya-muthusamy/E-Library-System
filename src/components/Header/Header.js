@@ -49,7 +49,7 @@ const Header = () => {
             </ul>
             <form className="form-inline my-2 my-lg-0">
               <button className="btn  mx-2 my-2 my-sm-0" type="submit">
-                <Link to="" className="text-decoration-none">
+                <Link to="signup" className="text-decoration-none">
                   Signup
                 </Link>
               </button>

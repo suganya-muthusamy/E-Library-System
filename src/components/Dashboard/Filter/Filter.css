@@ -1,3 +1,15 @@
+.search-book {
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 0, 0.9),
+      rgba(0, 0, 0, 0.8)
+    ),
+    url("../../../assets/image/search-book.jpg");
+
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .search-book h3,
 .add-book h3 {
   color: #ffc107;
@@ -7,4 +19,8 @@
 .add-book table tr td {
   padding-right: 10px;
   padding-top: 10px;
+}
+
+.search-book table label {
+  color: #ffc107;
 }

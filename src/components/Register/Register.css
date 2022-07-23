@@ -21,3 +21,7 @@
 .btn:hover {
   color: rgb(73, 70, 70);
 }
+
+.error-message {
+  font-size: 15px;
+}

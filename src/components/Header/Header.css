@@ -22,7 +22,10 @@
   border-radius: 5px;
   cursor: pointer;
 }
-
+.navbar-toggler {
+  background-color: transparent;
+  color: transparent;
+}
 .navbar-toggler-icon {
   color: #ffc107;
 }

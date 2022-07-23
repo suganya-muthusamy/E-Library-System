@@ -50,7 +50,7 @@ const Register = () => {
     ) {
       sessionStorage.setItem("email", getFormInput.email);
       sessionStorage.setItem("password", getFormInput.password);
-      navigate("login");
+      navigate("/login");
     }
   };
   return (
@@ -79,9 +79,9 @@ const Register = () => {
                 <label htmlFor="firstName">First Name</label>
               </div>
               {getFormCheck && getFormValidation.firstName && (
-                <div className="alert alert-danger">
+                <p className="text-danger error-message">
                   {formValidationError.firstName}
-                </div>
+                </p>
               )}
               <div className="form-floating mb-3">
                 <input
@@ -97,9 +97,9 @@ const Register = () => {
                 <label htmlFor="lastName">Last Name</label>
               </div>
               {getFormCheck && getFormValidation.lastName && (
-                <div className="alert alert-danger">
+                <p className="text-danger error-message">
                   {formValidationError.lastName}
-                </div>
+                </p>
               )}
 
               <div className=" form-floating mb-3">
@@ -120,9 +120,9 @@ const Register = () => {
                 </div>
               </div>
               {getFormCheck && getFormValidation.email && (
-                <div className="alert alert-danger">
+                <p className="text-danger error-message">
                   {formValidationError.email}
-                </div>
+                </p>
               )}
               <div className="form-floating mb-3">
                 <input
@@ -138,9 +138,9 @@ const Register = () => {
                 <label htmlFor="password">Password</label>
               </div>
               {getFormCheck && getFormValidation.password && (
-                <div className="alert alert-danger">
+                <p className="text-danger error-message">
                   {formValidationError.password}
-                </div>
+                </p>
               )}
               <button type="submit" className="btn">
                 Submit
