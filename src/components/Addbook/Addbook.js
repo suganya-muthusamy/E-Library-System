@@ -1,6 +1,8 @@
 import "./Addbook.css";
+import { addbookFormValidationError } from "../../helpers/Constant";
+import { alphanumeric, numeric } from "../../helpers/Validator";
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function Addbook() {
   // state declaration to get the book details
@@ -9,7 +11,7 @@ function Addbook() {
     bookTitle: "",
     bookDescription: "",
     authorName: "",
-    noOfBooks: "",
+    noOfBooksAvailable: "",
   });
 
   //   state declaration for form validation
@@ -18,8 +20,29 @@ function Addbook() {
     bookTitle: false,
     bookDescription: false,
     authorName: false,
-    noOfBooks: false,
+    noOfBooksAvailable: false,
   });
+
+  // state declaration for form check
+  const [getAddbookFormCheck, setAddbookFormCheck] = useState(false);
+
+  // to store data in the session storage
+  useEffect(() => {
+    if (
+      !getAddbookFormValidation.bookID &&
+      !getAddbookFormValidation.bookTitle &&
+      !getAddbookFormValidation.bookDescription &&
+      !getAddbookFormValidation.authorName &&
+      !getAddbookFormValidation.noOfBooksAvailable
+    ) {
+      let bookDetailsList = [];
+      bookDetailsList.push(getAddbookForm);
+      sessionStorage.setItem(
+        "bookDetailsList",
+        JSON.stringify(bookDetailsList)
+      );
+    }
+  }, [getAddbookFormCheck]);
 
   const onChangeHandler = (event) => {
     setAddbookForm({
@@ -30,7 +53,18 @@ function Addbook() {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    setAddbookFormValidation({});
+    setAddbookFormCheck(true);
+    setAddbookFormValidation({
+      bookID: numeric(getAddbookForm.bookID) ? false : true,
+      bookTitle: alphanumeric(getAddbookForm.bookTitle) ? false : true,
+      bookDescription: alphanumeric(getAddbookForm.bookDescription)
+        ? false
+        : true,
+      authorName: alphanumeric(getAddbookForm.authorName) ? false : true,
+      noOfBooksAvailable: numeric(getAddbookForm.noOfBooksAvailable)
+        ? false
+        : true,
+    });
   };
   return (
     <div>
@@ -41,6 +75,7 @@ function Addbook() {
             <table>
               <tr>
                 <td>
+                  {getAddbookForm.bookID}
                   <label for="bookID" className="form-label">
                     Book ID
                   </label>
@@ -51,14 +86,20 @@ function Addbook() {
                     className="form-control"
                     id="bookID"
                     name="bookID"
-                    required
+                    // required
                     onChange={onChangeHandler}
-                    pattern="^[0-9]+{1,5}$"
+                    // pattern="^[0-9]+{1,5}$"
                   />
                 </td>
+                {getAddbookFormCheck && getAddbookFormValidation.bookID && (
+                  <p className="text-danger error mt-2">
+                    {addbookFormValidationError.bookID}
+                  </p>
+                )}
               </tr>
               <tr>
                 <td>
+                  {getAddbookForm.bookTitle}
                   <label for="bookTitle" className="form-label">
                     Book Title{" "}
                   </label>
@@ -69,14 +110,20 @@ function Addbook() {
                     className="form-control"
                     id="bookTitle"
                     name="bookTitle"
-                    required
+                    // required
                     onChange={onChangeHandler}
-                    pattern="[A-Za-z0-9]+{1,50}"
+                    // pattern="[A-Za-z0-9]+{1,50}"
                   />
                 </td>
+                {getAddbookFormCheck && getAddbookFormValidation.bookTitle && (
+                  <p className="text-danger error mt-2">
+                    {addbookFormValidationError.bookTitle}
+                  </p>
+                )}
               </tr>
               <tr>
                 <td>
+                  {getAddbookForm.bookDescription}
                   <label for="bookDescription" className="form-label">
                     Book Description
                   </label>
@@ -87,14 +134,21 @@ function Addbook() {
                     className="form-control"
                     id="bookDescription"
                     name="bookDescription"
-                    required
+                    // required
                     onChange={onChangeHandler}
-                    pattern="[A-Za-z0-9]+{1,150}"
+                    // pattern="[A-Za-z0-9]+{1,150}"
                   />
                 </td>
+                {getAddbookFormCheck &&
+                  getAddbookFormValidation.bookDescription && (
+                    <p className="text-danger error mt-2">
+                      {addbookFormValidationError.bookDescription}
+                    </p>
+                  )}
               </tr>
               <tr>
                 <td>
+                  {getAddbookForm.authorName}
                   <label for="author" className="form-label">
                     Author Name
                   </label>
@@ -104,15 +158,21 @@ function Addbook() {
                     type="text"
                     className="form-control"
                     id="author"
-                    name="author"
-                    required
+                    name="authorName"
+                    // required
                     onChange={onChangeHandler}
-                    pattern="[A-Za-z0-9]+{1,50}"
+                    // pattern="[A-Za-z0-9]+{1,50}"
                   />
                 </td>
+                {getAddbookFormCheck && getAddbookFormValidation.authorName && (
+                  <p className="text-danger error mt-2">
+                    {addbookFormValidationError.authorName}
+                  </p>
+                )}
               </tr>
               <tr>
                 <td>
+                  {getAddbookForm.noOfBooksAvailable}
                   <label for="noOfBooks" className="form-label">
                     No.of Books Available
                   </label>
@@ -121,13 +181,19 @@ function Addbook() {
                   <input
                     type="number"
                     className="form-control"
-                    id="noOfBooks"
-                    name="noOfBooks"
-                    required
+                    id="noOfBooksAvailable"
+                    name="noOfBooksAvailable"
+                    // required
                     onChange={onChangeHandler}
-                    pattern="^[0-9]+{1,5}$"
+                    // pattern="^[0-9]+{1,5}$"
                   />
                 </td>
+                {getAddbookFormCheck &&
+                  getAddbookFormValidation.noOfBooksAvailable && (
+                    <p className="text-danger error mt-2">
+                      {addbookFormValidationError.noOfBooksAvailable}
+                    </p>
+                  )}
               </tr>
               <tr>
                 <td></td>
