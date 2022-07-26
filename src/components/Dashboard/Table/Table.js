@@ -1,6 +1,15 @@
 import "./Table.css";
+import { useState, useEffect } from "react";
 
 const Table = () => {
+  const [getBookList, setBookList] = useState([]);
+  useEffect(() => {
+    if (sessionStorage.getItem("bookDetailsList")) {
+      let bookList = JSON.parse(sessionStorage.getItem("bookDetailsList"));
+      console.log(bookList);
+      setBookList(bookList);
+    }
+  }, []);
   return (
     <div>
       <div className="container book-table mt-5">
@@ -11,31 +20,33 @@ const Table = () => {
               <th>Book Name</th>
               <th>Book Description</th>
               <th>Author</th>
-              <th>Number of books available</th>
-              <th>Purchase</th>
+              <th>No.of Books Available</th>
               <th>Edit</th>
               <th>Delete</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>001</td>
-              <td>Rich Dad Poor Dad</td>
-              <td>financial</td>
-              <td>robert</td>
-              <td>11</td>
-              <td>yes</td>
-              <td className="text-center">
-                <i className="fa fa-edit text-primary fw-bold"></i>
-              </td>
-              <td
-                className="text-center"
-                data-bs-toggle="modal"
-                data-bs-target="#deleteModal"
-              >
-                <i className="fa fa-trash text-danger fw-bold"></i>
-              </td>
-            </tr>
+            {getBookList.map((object, index) => {
+              return (
+                <tr key={index}>
+                  <td>{object.bookID}</td>
+                  <td>{object.bookTitle}</td>
+                  <td>{object.bookDescription}</td>
+                  <td>{object.authorName}</td>
+                  <td>{object.noOfBooksAvailable}</td>
+                  <td className="text-center">
+                    <i className="fa fa-edit text-primary fw-bold"></i>
+                  </td>
+                  <td
+                    className="text-center"
+                    data-bs-toggle="modal"
+                    data-bs-target="#deleteModal"
+                  >
+                    <i className="fa fa-trash text-danger fw-bold"></i>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
 

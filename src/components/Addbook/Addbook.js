@@ -1,8 +1,8 @@
 import "./Addbook.css";
 import { addbookFormValidationError } from "../../helpers/Constant";
 import { alphanumeric, numeric } from "../../helpers/Validator";
-import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function Addbook() {
   // state declaration to get the book details
@@ -26,21 +26,40 @@ function Addbook() {
   // state declaration for form check
   const [getAddbookFormCheck, setAddbookFormCheck] = useState(false);
 
+  const navigate = useNavigate();
+
   // to store data in the session storage
   useEffect(() => {
     if (
+      getAddbookForm.bookID &&
+      getAddbookForm.bookTitle &&
+      getAddbookForm.bookDescription &&
+      getAddbookForm.authorName &&
+      getAddbookForm.noOfBooksAvailable &&
       !getAddbookFormValidation.bookID &&
       !getAddbookFormValidation.bookTitle &&
       !getAddbookFormValidation.bookDescription &&
       !getAddbookFormValidation.authorName &&
       !getAddbookFormValidation.noOfBooksAvailable
     ) {
-      let bookDetailsList = [];
-      bookDetailsList.push(getAddbookForm);
-      sessionStorage.setItem(
-        "bookDetailsList",
-        JSON.stringify(bookDetailsList)
-      );
+      if (sessionStorage.getItem("bookDetailsList")) {
+        let bookDetailsList = JSON.parse(
+          sessionStorage.getItem("bookDetailsList")
+        );
+        bookDetailsList.push(getAddbookForm);
+        sessionStorage.setItem(
+          "bookDetailsList",
+          JSON.stringify(bookDetailsList)
+        );
+      } else {
+        let bookDetailsList = [];
+        bookDetailsList.push(getAddbookForm);
+        sessionStorage.setItem(
+          "bookDetailsList",
+          JSON.stringify(bookDetailsList)
+        );
+      }
+      navigate("/dashboard");
     }
   }, [getAddbookFormCheck]);
 
@@ -82,7 +101,7 @@ function Addbook() {
                 </td>
                 <td>
                   <input
-                    type="number"
+                    type="text"
                     className="form-control"
                     id="bookID"
                     name="bookID"
@@ -179,7 +198,7 @@ function Addbook() {
                 </td>
                 <td>
                   <input
-                    type="number"
+                    type="text"
                     className="form-control"
                     id="noOfBooksAvailable"
                     name="noOfBooksAvailable"
@@ -199,9 +218,7 @@ function Addbook() {
                 <td></td>
                 <td>
                   <button type="submit" className="btn btn-warning">
-                    <Link to="/dashboard" className="text-decoration-none">
-                      Add Book
-                    </Link>
+                    Add Book
                   </button>
                 </td>
               </tr>
