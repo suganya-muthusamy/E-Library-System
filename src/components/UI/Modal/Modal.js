@@ -1,12 +1,10 @@
-import "./Addbook.css";
-import { addbookFormValidationError } from "../../helpers/Constant";
-import { alphanumeric, numeric } from "../../helpers/Validator";
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { addbookFormValidationError } from "../../../helpers/Constant";
+import { alphanumeric, numeric } from "../../../helpers/Validator";
+import "./Modal.css";
 
-function Addbook() {
-  // state declaration to get the book details
-  const [getAddbookForm, setAddbookForm] = useState({
+function Modal(props) {
+  const [getEditBookForm, setEditBookForm] = useState({
     bookID: "",
     bookTitle: "",
     bookDescription: "",
@@ -15,7 +13,7 @@ function Addbook() {
   });
 
   //   state declaration for form validation
-  const [getAddbookFormValidation, setAddbookFormValidation] = useState({
+  const [getEditBookFormValidation, setEditBookFormValidation] = useState({
     bookID: false,
     bookTitle: false,
     bookDescription: false,
@@ -24,77 +22,81 @@ function Addbook() {
   });
 
   // state declaration for form check
-  const [getAddbookFormCheck, setAddbookFormCheck] = useState(false);
+  const [getEditBookFormCheck, setEditBookFormCheck] = useState(false);
 
-  const navigate = useNavigate();
+  //   const navigate = useNavigate();
 
-  // to store data in the session storage
+  useEffect(() => {
+    setEditBookForm({
+      bookID: props.editModalList.bookID,
+      bookTitle: props.editModalList.bookTitle,
+      bookDescription: props.editModalList.bookDescription,
+      authorName: props.editModalList.authorName,
+      noOfBooksAvailable: props.editModalList.noOfBooksAvailable,
+    });
+  }, []);
+
   useEffect(() => {
     if (
-      getAddbookForm.bookID &&
-      getAddbookForm.bookTitle &&
-      getAddbookForm.bookDescription &&
-      getAddbookForm.authorName &&
-      getAddbookForm.noOfBooksAvailable &&
-      !getAddbookFormValidation.bookID &&
-      !getAddbookFormValidation.bookTitle &&
-      !getAddbookFormValidation.bookDescription &&
-      !getAddbookFormValidation.authorName &&
-      !getAddbookFormValidation.noOfBooksAvailable
+      getEditBookForm.bookID &&
+      getEditBookForm.bookTitle &&
+      getEditBookForm.bookDescription &&
+      getEditBookForm.authorName &&
+      getEditBookForm.noOfBooksAvailable &&
+      !getEditBookFormValidation.bookID &&
+      !getEditBookFormValidation.bookTitle &&
+      !getEditBookFormValidation.bookDescription &&
+      !getEditBookFormValidation.authorName &&
+      !getEditBookFormValidation.noOfBooksAvailable
     ) {
-      if (sessionStorage.getItem("bookDetailsList")) {
-        let bookDetailsList = JSON.parse(
-          sessionStorage.getItem("bookDetailsList")
-        );
-        bookDetailsList.push(getAddbookForm);
-        sessionStorage.setItem(
-          "bookDetailsList",
-          JSON.stringify(bookDetailsList)
-        );
-      } else {
-        let bookDetailsList = [];
-        bookDetailsList.push(getAddbookForm);
-        sessionStorage.setItem(
-          "bookDetailsList",
-          JSON.stringify(bookDetailsList)
-        );
-      }
-      navigate("/dashboard");
+      props.onClose(getEditBookForm);
     }
-  }, [getAddbookFormCheck]);
+  }, [getEditBookFormCheck]);
 
   const onChangeHandler = (event) => {
-    setAddbookForm({
-      ...getAddbookForm,
+    setEditBookForm({
+      ...getEditBookForm,
       [event.target.name]: event.target.value,
     });
   };
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    setAddbookFormCheck(true);
-    setAddbookFormValidation({
-      bookID: numeric(getAddbookForm.bookID) ? false : true,
-      bookTitle: alphanumeric(getAddbookForm.bookTitle) ? false : true,
-      bookDescription: alphanumeric(getAddbookForm.bookDescription)
-        ? false
-        : true,
-      authorName: alphanumeric(getAddbookForm.authorName) ? false : true,
-      noOfBooksAvailable: numeric(getAddbookForm.noOfBooksAvailable)
-        ? false
-        : true,
+    setEditBookFormCheck(!getEditBookFormCheck);
+    setEditBookFormValidation({
+      bookID:
+        getEditBookForm.bookID && numeric(getEditBookForm.bookID)
+          ? false
+          : true,
+      bookTitle:
+        getEditBookForm.bookTitle && alphanumeric(getEditBookForm.bookTitle)
+          ? false
+          : true,
+      bookDescription:
+        getEditBookForm.bookDescription &&
+        alphanumeric(getEditBookForm.bookDescription)
+          ? false
+          : true,
+      authorName:
+        getEditBookForm.authorName && alphanumeric(getEditBookForm.authorName)
+          ? false
+          : true,
+      noOfBooksAvailable:
+        getEditBookForm.noOfBooksAvailable &&
+        numeric(getEditBookForm.noOfBooksAvailable)
+          ? false
+          : true,
     });
   };
   return (
-    <div className="container add-book mt-5">
+    <div id="editBookModal">
       <div className="row">
         <div className="col-md-3"></div>
         <div className="col-md-6">
           <form onSubmit={onSubmitHandler} className="px-5 py-4 rounded">
-            <h3 className="text-center mb-3 ">Add Book</h3>
+            <h3 className="text-center mb-3 text-warning ">Edit Book</h3>
             <div className="row">
               <div className="col-md-6">
-                {getAddbookForm.bookID}
                 <div className="form-floating mb-2">
                   <input
                     type="text"
@@ -102,19 +104,19 @@ function Addbook() {
                     id="bookID"
                     name="bookID"
                     placeholder="Book ID"
+                    value={getEditBookForm.bookID || ""}
                     onChange={onChangeHandler}
                     // pattern="^[0-9]+{1,5}$"
                   />
                   <label htmlFor="bookID">Book ID</label>
                 </div>
 
-                {getAddbookFormCheck && getAddbookFormValidation.bookID && (
+                {getEditBookFormCheck && getEditBookFormValidation.bookID && (
                   <p className="text-danger error mt-2">
                     {addbookFormValidationError.bookID}
                   </p>
                 )}
 
-                {getAddbookForm.bookTitle}
                 <div className="form-floating mb-2">
                   <input
                     type="text"
@@ -122,19 +124,20 @@ function Addbook() {
                     id="bookTitle"
                     name="bookTitle"
                     placeholder="Book Title"
+                    value={getEditBookForm.bookTitle || ""}
                     onChange={onChangeHandler}
                     // pattern="[A-Za-z0-9]+{1,50}"
                   />
                   <label htmlFor="bookTitle">Book Title</label>
                 </div>
 
-                {getAddbookFormCheck && getAddbookFormValidation.bookTitle && (
-                  <p className="text-danger error mt-2">
-                    {addbookFormValidationError.bookTitle}
-                  </p>
-                )}
+                {getEditBookFormCheck &&
+                  getEditBookFormValidation.bookTitle && (
+                    <p className="text-danger error mt-2">
+                      {addbookFormValidationError.bookTitle}
+                    </p>
+                  )}
 
-                {getAddbookForm.bookDescription}
                 <div className="form-floating mb-2">
                   <input
                     type="text"
@@ -142,20 +145,20 @@ function Addbook() {
                     id="bookDescription"
                     name="bookDescription"
                     placeholder="Book Description"
+                    value={getEditBookForm.bookDescription || ""}
                     onChange={onChangeHandler}
                     // pattern="[A-Za-z0-9]+{1,150}"
                   />
                   <label htmlFor="bookDescription">Book Description</label>
                 </div>
-                {getAddbookFormCheck &&
-                  getAddbookFormValidation.bookDescription && (
+                {getEditBookFormCheck &&
+                  getEditBookFormValidation.bookDescription && (
                     <p className="text-danger error mt-2">
                       {addbookFormValidationError.bookDescription}
                     </p>
                   )}
               </div>
               <div className="col-md-6">
-                {getAddbookForm.authorName}
                 <div className="form-floating mb-2">
                   <input
                     type="text"
@@ -163,19 +166,20 @@ function Addbook() {
                     id="author"
                     name="authorName"
                     placeholder="Author Name"
+                    value={getEditBookForm.authorName || ""}
                     onChange={onChangeHandler}
                     // pattern="[A-Za-z0-9]+{1,50}"
                   />
                   <label htmlFor="author">Author Name</label>
                 </div>
 
-                {getAddbookFormCheck && getAddbookFormValidation.authorName && (
-                  <p className="text-danger error mt-2">
-                    {addbookFormValidationError.authorName}
-                  </p>
-                )}
+                {getEditBookFormCheck &&
+                  getEditBookFormValidation.authorName && (
+                    <p className="text-danger error mt-2">
+                      {addbookFormValidationError.authorName}
+                    </p>
+                  )}
 
-                {getAddbookForm.noOfBooksAvailable}
                 <div className="form-floating mb-2">
                   <input
                     type="text"
@@ -183,13 +187,14 @@ function Addbook() {
                     id="noOfBooksAvailable"
                     name="noOfBooksAvailable"
                     placeholder="No of Books Available"
+                    value={getEditBookForm.noOfBooksAvailable || ""}
                     onChange={onChangeHandler}
                     // pattern="^[0-9]+{1,5}$"
                   />
                   <label htmlFor="noOfBooks">No.of Books Available</label>
                 </div>
-                {getAddbookFormCheck &&
-                  getAddbookFormValidation.noOfBooksAvailable && (
+                {getEditBookFormCheck &&
+                  getEditBookFormValidation.noOfBooksAvailable && (
                     <p className="text-danger error mt-2">
                       {addbookFormValidationError.noOfBooksAvailable}
                     </p>
@@ -200,7 +205,7 @@ function Addbook() {
                     type="submit"
                     className="btn btn-warning d-block w-100 h-100 pt-2 pb-2"
                   >
-                    Add Book
+                    Save Changes
                   </button>
                 </div>
               </div>
@@ -213,4 +218,4 @@ function Addbook() {
   );
 }
 
-export default Addbook;
+export default Modal;

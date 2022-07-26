@@ -75,66 +75,46 @@ const Login = () => {
                 {formValidationError.sessionDetails}
               </p>
             )}
-            <form
-              className="login-form my-4 d-flex justify-content-center"
-              onSubmit={onSubmitHandler}
-            >
-              <table>
-                <tr>
-                  <td className="p-2">
-                    <label htmlFor="username" className="form-label">
-                      User Name
-                    </label>
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="username"
-                      placeholder="User Name"
-                      // required
-                      name="userName"
-                      onChange={onChangeHandler}
-                    />
-                    {getLoginFormCheck && getLoginFormValidation.userName && (
-                      <p className="text-danger error mt-2">
-                        {formValidationError.email}
-                      </p>
-                    )}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="p-2">
-                    <label htmlFor="password" className="form-label">
-                      Password
-                    </label>
-                  </td>
-                  <td>
-                    <input
-                      type="password"
-                      className="form-control"
-                      id="password"
-                      placeholder="Password"
-                      // required
-                      name="password"
-                      onChange={onChangeHandler}
-                    />
-                    {getLoginFormCheck && getLoginFormValidation.password && (
-                      <p className="text-danger error mt-2">
-                        {formValidationError.password}
-                      </p>
-                    )}
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>
-                    <button type="submit" className="btn btn-warning mt-2">
-                      Login
-                    </button>
-                  </td>
-                </tr>
-              </table>
+            <form className="login-form my-4" onSubmit={onSubmitHandler}>
+              <div className="form-floating">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="username"
+                  placeholder="User Name"
+                  // required
+                  name="userName"
+                  onChange={onChangeHandler}
+                />
+                <label htmlFor="username">User Name</label>
+              </div>
+              {getLoginFormCheck && getLoginFormValidation.userName && (
+                <p className="text-danger error mt-2">
+                  {formValidationError.email}
+                </p>
+              )}
+
+              <div className="form-floating">
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  placeholder="Password"
+                  // required
+                  name="password"
+                  onChange={onChangeHandler}
+                />
+                <label htmlFor="password">Password</label>
+              </div>
+              {getLoginFormCheck && getLoginFormValidation.password && (
+                <p className="text-danger error mt-2">
+                  {formValidationError.password}
+                </p>
+              )}
+
+              <button type="submit" className="btn btn-warning mt-2">
+                Login
+              </button>
             </form>
           </div>
           <div className="col-4"></div>
